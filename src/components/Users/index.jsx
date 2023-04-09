@@ -1,5 +1,6 @@
 import React from "react";
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
+
 
 export class Users extends React.Component {
     constructor(props) {
@@ -11,6 +12,15 @@ export class Users extends React.Component {
     }
 
     componentDidMount() {
+        this.searchUser();
+
+    }
+
+    componentWillUnmount() {
+
+    }
+
+    searchUser = () => {
         fetch("https://rest-api-user.herokuapp.com/categories")
             .then(resposta => resposta.json())
             .then(dados => {
@@ -20,7 +30,13 @@ export class Users extends React.Component {
 
     }
 
-    componentWillUnmount() {
+    deleteUser = (id) => {
+        fetch("https://rest-api-user.herokuapp.com/categories/" + id, { method: 'DELETE' })
+            .then(resposta => {
+                if (resposta.ok) {
+                    this.searchUser();
+                }
+            })
 
     }
 
@@ -36,6 +52,7 @@ export class Users extends React.Component {
                         <th>idade</th>
                         <th>Gênero</th>
                         <th>Ocupação</th>
+                        <th> Editar</th>
 
                     </tr>
                 </thead>
@@ -49,6 +66,7 @@ export class Users extends React.Component {
                                 <td> {usuarios.idade} </td>
                                 <td> {usuarios.genero}</td>
                                 <td> {usuarios.ocupacao} </td>
+                                <td> Atualizar  <Button variant="danger" onClick={() => this.deleteUser(usuarios.id)}>Excluir</Button></td>
                             </tr>
                         )
                     }
