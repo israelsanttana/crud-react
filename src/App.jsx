@@ -9,9 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function App() {
     return (
-        <div>
+        <main className={styles.main}>
             <BrowserRouter>
-                <Nav variant="tabs">
+                <Nav variant="tabs" className='flex-column'>
                     <Nav.Item>
                         <Nav.Link as={Link} to={"/"}>Página inicial</Nav.Link>
                     </Nav.Item>
@@ -31,7 +31,7 @@ export function App() {
                     <Route path='/sobre' element={<About />}></Route>
                 </Routes>
             </BrowserRouter>
-        </div>
+        </main>
 
     )
 }
