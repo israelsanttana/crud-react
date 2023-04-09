@@ -3,17 +3,28 @@ import { About } from './components/about';
 import { Users } from './components/users';
 import styles from './global.module.css'
 import { BrowserRouter, Routes, Link, Route } from 'react-router-dom'
+import { Nav } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export function App() {
     return (
         <div>
             <BrowserRouter>
-                <ul>
-                    <li><Link to={"/"}>Página inicial</Link ></li>
-                    <li><Link to={"/usuarios"}>Usuários</Link ></li>
-                    <li><Link to={"/sobre"}>Sobre</Link ></li>
-                </ul>
+                <Nav variant="tabs">
+                    <Nav.Item>
+                        <Nav.Link as={Link} to={"/"}>Página inicial</Nav.Link>
+                    </Nav.Item>
+
+                    <Nav.Item>
+                        <Nav.Link as={Link} to={"/usuarios"}>Usuários</Nav.Link>
+                    </Nav.Item>
+
+                    <Nav.Item>
+                        <Nav.Link as={Link} to={"/sobre"}>Sobre</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+
                 <Routes>
                     <Route path='/' element={<Home />}></Route>
                     <Route path='/usuarios' element={<Users />}></Route>
