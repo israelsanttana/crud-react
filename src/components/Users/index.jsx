@@ -6,7 +6,28 @@ export class Users extends React.Component {
         super(props);
 
         this.state = {
-            usuarios: []
+            usuarios: [
+                {
+                    "id": 1,
+                    "nome": "João da Silva",
+                    "email": "joao.silva@example.com",
+                    "telefone": "(99) 9999-1111",
+
+                    "idade": 28,
+                    "genero": "masculino",
+                    "ocupacao": "advogado"
+                },
+                {
+                    "id": 2,
+                    "nome": "Maria Oliveira",
+                    "email": "maria.oliveira@example.com",
+                    "telefone": "(99) 9999-2222",
+
+                    "idade": 42,
+                    "genero": "feminino",
+                    "ocupacao": "médica"
+                }
+            ]
         }
     }
 
@@ -15,11 +36,9 @@ export class Users extends React.Component {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nome</th>
                         <th>E-mail</th>
                         <th>Telefone</th>
-                        <th>Endereço</th>
                         <th>idade</th>
                         <th>Gênero</th>
                         <th>Ocupação</th>
@@ -27,27 +46,21 @@ export class Users extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td> 1</td>
-                        <td> Luis </td>
-                        <td> Luis@teste.com </td>
-                        <td> 0000-0000</td>
-                        <td> endereco </td>
-                        <td> 26 </td>
-                        <td> masculino </td>
-                        <td> developer </td>
-                    </tr>
+                    {
+                        this.state.usuarios.map((usuarios) =>
+                            <tr>
+                                <td> {usuarios.nome} </td>
+                                <td> {usuarios.email} </td>
+                                <td> {usuarios.telefone} </td>
+                                <td> {usuarios.idade} </td>
+                                <td> {usuarios.genero}</td>
+                                <td> {usuarios.ocupacao} </td>
+                            </tr>
+                        )
+                    }
 
-                    <tr>
-                        <td> 1</td>
-                        <td> Luis </td>
-                        <td> Luis@teste.com </td>
-                        <td> 0000-0000</td>
-                        <td> endereco </td>
-                        <td> 26 </td>
-                        <td> masculino </td>
-                        <td> developer </td>
-                    </tr>
+
+
 
                 </tbody>
             </Table>
