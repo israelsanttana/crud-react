@@ -6,30 +6,24 @@ export class Users extends React.Component {
         super(props);
 
         this.state = {
-            usuarios: [
-                {
-                    "id": 1,
-                    "nome": "João da Silva",
-                    "email": "joao.silva@example.com",
-                    "telefone": "(99) 9999-1111",
-
-                    "idade": 28,
-                    "genero": "masculino",
-                    "ocupacao": "advogado"
-                },
-                {
-                    "id": 2,
-                    "nome": "Maria Oliveira",
-                    "email": "maria.oliveira@example.com",
-                    "telefone": "(99) 9999-2222",
-
-                    "idade": 42,
-                    "genero": "feminino",
-                    "ocupacao": "médica"
-                }
-            ]
+            usuarios: []
         }
     }
+
+    componentDidMount() {
+        fetch("https://rest-api-user.herokuapp.com/categories")
+            .then(resposta => resposta.json())
+            .then(dados => {
+                this.setState({ usuarios: dados })
+
+            })
+
+    }
+
+    componentWillUnmount() {
+
+    }
+
 
     render() {
         return (
@@ -58,18 +52,9 @@ export class Users extends React.Component {
                             </tr>
                         )
                     }
-
-
-
-
                 </tbody>
             </Table>
-
         )
-
-
-
-
 
     }
 }
