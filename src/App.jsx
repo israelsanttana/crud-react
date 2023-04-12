@@ -1,6 +1,6 @@
-import { Home } from './components/home/Home';
-import { About } from './components/about/About';
-import { Users } from './components/users/Users';
+import { Home } from './components/home/Home.jsx';
+import { About } from './components/about/About.jsx';
+import { Users } from './components/users/Users.jsx';
 import styles from './global.module.css'
 import { BrowserRouter, Routes, Link, Route } from 'react-router-dom'
 import { Nav } from 'react-bootstrap';
