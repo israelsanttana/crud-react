@@ -1,5 +1,5 @@
-import { Home } from './components/home';
-import { About } from './components/about';
+import { Home } from './components/Home';
+import { About } from './components/About';
 import { Users } from './components/users';
 import styles from './global.module.css'
 import { BrowserRouter, Routes, Link, Route } from 'react-router-dom'
