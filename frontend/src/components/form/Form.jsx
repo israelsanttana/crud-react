@@ -26,7 +26,17 @@ const Input = styled.input`
     border: 1px solid #bbb;
     border-radius: 5px;
     height: 40px;
-`
+`;
+
+const Button = styled.button`
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: #2c73d2;
+    color: #fff;
+    height: 42px;
+`;
 
 export function Form(onEdit) {
 
@@ -54,7 +64,7 @@ export function Form(onEdit) {
                 <Input name="data_nascimento" type="date" />
             </InputArea>
 
-            <button type="submit">Salvar</button>
+            <Button type="submit">Salvar</Button>
         </FormContainer>
 
     )
