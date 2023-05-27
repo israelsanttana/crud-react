@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import styled from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -15,4 +16,16 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #f2f2f2;
     }
 `;
+
+export const Container = styled.div`
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const Title = styled.h2``;
 

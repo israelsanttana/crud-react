@@ -1,71 +1,99 @@
-import React, { useRef } from "react"
-import styled from "styled-components"
+import React, { useEffect, useState } from "react";
+import { FormContainer, InputArea, Input, Button } from "./Form.styles";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const FormContainer = styled.form`
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    flex-wrap: wrap;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0px 0px 5px #ccc;
+export function Form({ getUsers, onEdit, setOnEdit }) {
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+    const [fone, setFone] = useState("");
+    const [dataNascimento, setDataNascimento] = useState("");
 
-    
-`;
+    useEffect(() => {
+        if (onEdit) {
+            setNome(onEdit.nome || "");
+            setEmail(onEdit.email || "");
+            setFone(onEdit.fone || "");
+            setDataNascimento(onEdit.data_nascimento || "");
+        } else {
+            setNome("");
+            setEmail("");
+            setFone("");
+            setDataNascimento("");
+        }
+    }, [onEdit]);
 
-const InputArea = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-const Label = styled.label``;
+        if (!nome || !email || !fone || !dataNascimento) {
+            return toast.warn("Preencha todos os campos");
+        }
 
-const Input = styled.input`
-    width: 120px;
-    padding: 0 10px;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    height: 40px;
-`;
+        const userData = {
+            nome,
+            email,
+            fone,
+            data_nascimento: dataNascimento,
+        };
 
-const Button = styled.button`
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    background-color: #2c73d2;
-    color: #fff;
-    height: 42px;
-`;
-
-export function Form(onEdit) {
-
-    const ref = useRef();
+        try {
+            if (onEdit) {
+                await axios.put("http://localhost:8800/" + onEdit.id, userData);
+            } else {
+                await axios.post("http://localhost:8800", userData);
+            }
+            toast.success("Usuário salvo com sucesso");
+            setNome("");
+            setEmail("");
+            setFone("");
+            setDataNascimento("");
+            setOnEdit(null);
+            getUsers();
+        } catch (error) {
+            toast.error("Ocorreu um erro ao salvar o usuário");
+        }
+    };
 
     return (
-        <FormContainer ref={ref}>
+        <FormContainer onSubmit={handleSubmit}>
             <InputArea>
                 <label>Nome</label>
-                <Input name="nome" />
+                <Input
+                    type="text"
+                    value={nome}
+                    onChange={(e) => setNome(e.target.value)}
+                />
             </InputArea>
 
             <InputArea>
                 <label>E-mail</label>
-                <Input name="email" type="email" />
+                <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
             </InputArea>
 
             <InputArea>
                 <label>Telefone</label>
-                <Input name="fone" />
+                <Input
+                    type="number"
+                    value={fone}
+                    onChange={(e) => setFone(e.target.value)}
+                />
             </InputArea>
 
             <InputArea>
                 <label>Data de nascimento</label>
-                <Input name="data_nascimento" type="date" />
+                <Input
+                    type="date"
+                    value={dataNascimento}
+                    onChange={(e) => setDataNascimento(e.target.value)}
+                />
             </InputArea>
 
             <Button type="submit">Salvar</Button>
         </FormContainer>
-
-    )
+    );
 }
