@@ -21,7 +21,6 @@ export function App() {
     } catch (error) {
       toast.error(error);
     }
-    console.log("getUsers foi chamada");
   };
 
   useEffect(() => {

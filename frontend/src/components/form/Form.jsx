@@ -36,7 +36,6 @@ export function Form({ getUsers, onEdit, setOnEdit }) {
             fone,
             data_nascimento: dataNascimento,
         };
-        console.log(userData);
 
         try {
             if (onEdit) {
@@ -44,7 +43,6 @@ export function Form({ getUsers, onEdit, setOnEdit }) {
             } else {
                 await axios.post("http://localhost:8800/", userData);
             }
-            console.log("enviou");
 
             toast.success("Usuário salvo com sucesso");
             setNome("");
