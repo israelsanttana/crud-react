@@ -36,13 +36,16 @@ export function Form({ getUsers, onEdit, setOnEdit }) {
             fone,
             data_nascimento: dataNascimento,
         };
+        console.log(userData);
 
         try {
             if (onEdit) {
                 await axios.put("http://localhost:8800/" + onEdit.id, userData);
             } else {
-                await axios.post("http://localhost:8800", userData);
+                await axios.post("http://localhost:8800/", userData);
             }
+            console.log("enviou");
+
             toast.success("Usuário salvo com sucesso");
             setNome("");
             setEmail("");
